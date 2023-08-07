@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Rasshifrator V1.1</title>
+    <link rel="shortcut icon" href="/static/img/bg2.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond"/>
+    <link type='text/css' rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main>
+    <div class="main">
+        <div class="filter"></div>
+    <form action="/not"  method="POST">
+        <h1 class="zag">Rasshifrator V1.1</h1>
+        <div class="vvod">
+        <label class="label">Введите текст для расшифровки:</label>
+        <textarea cols="40" rows="6" name="text" placeholder="Введите текст для расшифровки" required></textarea>
+        </div>
+
+        <label class="label2">Выберите шифр:</label>
+        <select name="checked">
+            <option disabled="disabled">Выберите способ расшифровки</option>
+            <option value="0">Виженера</option>
+            <option value="1">Гаммирование</option>
+            <option value="2">RSA</option>
+        </select>
+        
+        <button class="button_go">Расшифровать!</button>
+    </form>
+    
+    </div>
+    </main>
+</body>
+</html>

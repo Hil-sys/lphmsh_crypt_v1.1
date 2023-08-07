@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Rasshifrator V1.1\Гаммирование</title>
+    <link rel="shortcut icon" href="/static/img/bg2.png">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond"/>
+    <link type='text/css' rel="stylesheet" href="{{ url_for('static', filename='css/style_ras2_2_empty.css') }}">
+</head>
+<body>
+
+    <main>
+        <div class="main">
+            <div class="filter"></div>
+        <div class="form">
+            <h1 class="zag">Rasshifrator V1.1</h1>
+
+        <form action="/ras2_2" method="POST">
+            <p class="label">Текст до расшифровки:</p>
+
+            <div class="podokno">
+
+                <div id="openModal" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                          <a href="#close" title="Close" class="close">×</a>
+                        </div>
+                        <div class="modal-body">    
+                            <textarea disabled='disabled' cols="38" rows="17" class="ta_end_vis">{{ text }}</textarea>
+                        </div>
+                    </div>
+                </div>
+    
+                <textarea disabled='disabled' cols="15" rows="1" class="ta_end">{{ text[:9] }}...</textarea>
+                <a class="a" href="#openModal">Посмотреть текст полностью</a>
+    
+            </div>
+            
+            
+                <div class="change">
+                    <input type="text" name="letter" maxlength="1" placeholder="Введите букву" required>
+                    <input type="text" name="pos" maxlength="1" placeholder="Введите чиселко" required>
+                    <button class="button_rep" class="continue" type="submit">Заменить</button>
+                </div>
+                <div class="last">    
+                    <label class="label2">Получившийся текст:</label>
+                    <textarea disabled='disabled' cols="15" rows="1" class="ta_end" id="iz">{{ gg }}</textarea>
+                </div>    
+
+        </form>
+        
+        </div>
+    </div>
+    </main>
+
+</body>
+</html>
