@@ -7,7 +7,6 @@ from flask import *
 
 base, chisla= 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33'
 basem, chislam = list(base), chisla.split()
-base_1 = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
 dic = []
 for i in range(len(chislam)):
@@ -85,8 +84,9 @@ def index():
 
 @app.route('/not', methods=['GET', 'POST'])
 def my_form_post():
-    global text, text_old, text_old_for_ras1
+    global text, text_old, text_old_for_ras1, base_1
     base_old = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+    base_1 = base_old
     text = request.form['text']
     text_old = text
     text_old_for_ras1 = text
