@@ -7,6 +7,8 @@ from flask import *
 
 base, chisla= 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33'
 basem, chislam = list(base), chisla.split()
+u = 0
+j = 0
 
 dic = []
 for i in range(len(chislam)):
@@ -92,6 +94,7 @@ def my_form_post():
     text_old_for_ras1 = text
     max_l = len(text)
     select = request.form.get('checked')
+    
     if select != 3:
         s1 = graphs1(text, base_old)
         bubble_sort(s1)
@@ -147,14 +150,16 @@ def perevod_b2():
 
 @app.route('/ras2_2', methods=['POST'])
 def perevod_b3():
-    global c, text, text_ras2
-    a = request.form['letter']
-    b = request.form['pos']
-
+    global c, text, text_ras2, u, j
+    i=u
+    u = request.form['letter']
+    l = j
+    j = request.form['pos']
     text = text_ras2
-
-    text = ras2(text, int(c), a, int(b))
-
+    if i != j and l != j:
+        text = ras2(text, int(c), u, int(j))
+    else:
+        text = text
     text_ras2 = text
 
     return render_template('index_ras2_2.html', gg=text, text=text_old)
