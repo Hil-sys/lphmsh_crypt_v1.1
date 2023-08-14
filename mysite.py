@@ -5,7 +5,7 @@
 
 from flask import *
 
-base, chisla= 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33'
+base, chisla = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя', '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33'
 basem, chislam = list(base), chisla.split()
 u = 0
 j = 0
@@ -57,7 +57,7 @@ def ras2(text, c, a, b):
     return text_str
 
 def ras3(text):
-    a  = text.split()
+    a = text.split()
     c = int(a[0])
     d = int(a[1])
     n = int(a[2])
@@ -65,7 +65,7 @@ def ras3(text):
     for i in range(d):
         m *= c
         if m > n:
-            m = m % n
+            m %= n
     return m
 
 
@@ -151,7 +151,7 @@ def perevod_b2():
 @app.route('/ras2_2', methods=['POST'])
 def perevod_b3():
     global c, text, text_ras2, u, j
-    i=u
+    i = u
     u = request.form['letter']
     l = j
     j = request.form['pos']
