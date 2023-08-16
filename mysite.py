@@ -86,21 +86,19 @@ def index():
 
 @app.route('/not', methods=['GET', 'POST'])
 def my_form_post():
-    global text, base_1
-    base_old = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-    base_1 = base_old
+    base_1 = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
     text = request.form['text']
     max_l = len(text)
     select = request.form.get('checked')
 
     if select != 3:
-        s1 = graphs1(text, base_old)
+        s1 = graphs1(text, base_1)
         bubble_sort(s1)
     else:
         s1 = ''
 
     if select == '0':
-        return render_template('index_ras1_1.html', text=text, dictc=s1, gg=text)
+        return render_template('index_ras1_1.html', text=text, dictc=s1, gg=text, base=base_1)
     elif select == '1':
         return render_template('index_ras2_1.html', text=text, dictc=s1, max_l=max_l, gg=text)
     else:
@@ -112,9 +110,7 @@ def my_form_post():
 
 # RAS1
 @app.route('/ras1', methods=['GET', 'POST'])
-def perevod_b1():
-    global base_1
-    
+def perevod_b1():    
     if request.method == 'POST':
         if request.form.get('action1') == 'Отменить действие':
             comeback = str(request.form['cb'])
@@ -122,6 +118,7 @@ def perevod_b1():
             a = comeback[-2]
             comeback = comeback[:-2]
 
+            base_1 = request.form['base']
             text_old = request.form['text_old']
             text = request.form['text_new']
 
@@ -131,7 +128,7 @@ def perevod_b1():
             s1 = graphs1(text, base_1)
             bubble_sort(s1)
 
-            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, cb=comeback)
+            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, cb=comeback, base=base_1)
         else:
             comeback = ''
             comeback += str(request.form['cb'])
@@ -139,6 +136,7 @@ def perevod_b1():
             b = request.form['after']
             text_old = request.form['text_old']
             text = request.form['text_new']
+            base_1 = request.form['base']
 
             comeback += str(a)
             comeback += str(b)
@@ -148,7 +146,7 @@ def perevod_b1():
             s1 = graphs1(text, base_1)
             bubble_sort(s1)
 
-            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, a=a, b=b, cb=comeback)
+            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, a=a, b=b, cb=comeback, base=base_1)
 
 # RAS2
 @app.route('/ras2_1', methods=['POST'])
