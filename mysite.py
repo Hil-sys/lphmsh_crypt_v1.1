@@ -57,7 +57,7 @@ def ras2(text, c, a, b):
     return text_str
 
 def ras3(text):
-    a = text.split()
+    a  = text.split()
     c = int(a[0])
     d = int(a[1])
     n = int(a[2])
@@ -65,7 +65,7 @@ def ras3(text):
     for i in range(d):
         m *= c
         if m > n:
-            m %= n
+            m = m % n
     return m
 
 
@@ -86,15 +86,13 @@ def index():
 
 @app.route('/not', methods=['GET', 'POST'])
 def my_form_post():
-    global text, text_old, text_old_for_ras1, base_1
+    global text, base_1
     base_old = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
     base_1 = base_old
     text = request.form['text']
-    text_old = text
-    text_old_for_ras1 = text
     max_l = len(text)
     select = request.form.get('checked')
-    
+
     if select != 3:
         s1 = graphs1(text, base_old)
         bubble_sort(s1)
@@ -102,9 +100,9 @@ def my_form_post():
         s1 = ''
 
     if select == '0':
-        return render_template('index_ras1_1.html', text=text, dictc=s1)
+        return render_template('index_ras1_1.html', text=text, dictc=s1, gg=text)
     elif select == '1':
-        return render_template('index_ras2_1.html', text=text, dictc=s1, max_l=max_l)
+        return render_template('index_ras2_1.html', text=text, dictc=s1, max_l=max_l, gg=text)
     else:
         text = str(ras3(text))
         if len(text) > 15:
@@ -115,59 +113,69 @@ def my_form_post():
 # RAS1
 @app.route('/ras1', methods=['GET', 'POST'])
 def perevod_b1():
-    global text, base_1, a, b
+    global base_1
     
     if request.method == 'POST':
         if request.form.get('action1') == 'Отменить действие':
+            comeback = str(request.form['cb'])
+            b = comeback[-1]
+            a = comeback[-2]
+            comeback = comeback[:-2]
+
+            text_old = request.form['text_old']
+            text = request.form['text_new']
+
             text = text.replace(b.upper(), a)
 
             base_1 = base_1.replace(b.upper(), a)
             s1 = graphs1(text, base_1)
             bubble_sort(s1)
 
-            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text)
+            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, cb=comeback)
         else:
+            comeback = ''
+            comeback += str(request.form['cb'])
             a = request.form['now']
             b = request.form['after']
+            text_old = request.form['text_old']
+            text = request.form['text_new']
 
+            comeback += str(a)
+            comeback += str(b)
             text = ras1(text, a, b)
 
             base_1 = base_1.replace(a, b.upper())
             s1 = graphs1(text, base_1)
             bubble_sort(s1)
 
-            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text)
+            return render_template('index_ras1_2.html', text=text_old, dictc=s1, gg=text, a=a, b=b, cb=comeback)
 
 # RAS2
 @app.route('/ras2_1', methods=['POST'])
 def perevod_b2():
-    global c, text_ras2
     c = request.form['len']
-    text_ras2 = text
+    text_old = request.form['text_old']
     iz = 'Пустенько :('
     
-    return render_template('index_ras2_2_empty.html', text=text, gg=iz)
+    return render_template('index_ras2_2_empty.html', text=text_old, gg=iz, gg1=text_old, c=c)
 
 @app.route('/ras2_2', methods=['POST'])
 def perevod_b3():
-    global c, text, text_ras2, u, j
-    i = u
+    text_old = request.form['text_old']
+    text = request.form['text_new']
+    c = request.form['c']
     u = request.form['letter']
-    l = j
     j = request.form['pos']
-    text = text_ras2
-    if i != j and l != j:
-        text = ras2(text, int(c), u, int(j))
-    else:
-        text = text
-    text_ras2 = text
 
-    return render_template('index_ras2_2.html', gg=text, text=text_old)
+    text = ras2(text, int(c), u, int(j))
+
+    return render_template('index_ras2_2.html', gg1=text, text=text_old, c=c)
     
 #endfile
 @app.route('/end', methods=['POST'])
 def end():
-    global text
+    text = request.form['text_new']
+
     if len(text) > 15:
         return render_template('index_endlong.html', text=text)
     else:
