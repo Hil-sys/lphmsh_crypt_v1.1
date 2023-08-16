@@ -18,7 +18,9 @@
 
         <form action="/ras2_2" method="POST">
             <p class="label">Текст до расшифровки:</p>
-
+            <input type="hidden" value="{{ text }}" name="text_old">
+            <input type="hidden" value="{{ c }}" name="c">
+            <input type="hidden" value="{{ gg1 }}" name="text_new">
             <div class="podokno">
 
                 <div id="openModal" class="modal">

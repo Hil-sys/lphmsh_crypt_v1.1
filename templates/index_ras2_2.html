@@ -18,7 +18,9 @@
 
         <form action="/ras2_2" method="POST">
             <p class="label">Текст до расшифровки:</p>
-
+            <input type="hidden" value="{{ text }}" name="text_old">
+            <input type="hidden" value="{{ c }}" name="c">
+            <input type="hidden" value="{{ gg1 }}" name="text_new">
             <div class="podokno">
 
                 <div id="openModal" class="modal">
@@ -51,12 +53,12 @@
                               <a href="#close" title="Close" class="close">×</a>
                             </div>
                             <div class="modal-body">    
-                                <textarea disabled='disabled' cols="38" rows="17" class="ta_end_vis">{{ gg }}</textarea>
+                                <textarea disabled='disabled' cols="38" rows="17" class="ta_end_vis">{{ gg1 }}</textarea>
                             </div>
                         </div>
                     </div>
         
-                    <textarea disabled='disabled' cols="15" rows="1" class="ta_end">{{ gg[:9] }}...</textarea>
+                    <textarea disabled='disabled' cols="15" rows="1" class="ta_end">{{ gg1[:9] }}...</textarea>
                     <a class="a" href="#openModal2">Посмотреть текст полностью</a>
                 </div>    
 
@@ -64,6 +66,7 @@
 
             <form action="/end" method="POST" onsubmit="return confirm('Вы уверенны, что хотите закончить расшифровку?');">
                 <button class="button_go">Закончить расшифровку</button>
+                <input type="hidden" value="{{ gg1 }}" name="text_new">
             </form>
 
         </div>

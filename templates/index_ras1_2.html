@@ -58,6 +58,9 @@
             <div class="inl">
                 <div class="podokno">
                     <p class="label">Текст до расшифровки:</p>
+                    <input type="hidden" value="{{ text }}" name="text_old">
+                    <input type="hidden" value="{{ gg }}" name="text_new">
+                    <input type="hidden" value="{{ cb }}" name="cb">
                     <div id="openModal" class="modal">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -101,13 +104,17 @@
                 <div class="last1">
                     <form action="/end" method="POST" onsubmit="return confirm('Вы уверенны, что хотите закончить расшифровку?');">
                         <button type="submit" class="button_go">Закончить расшифровку</button>
+                        <input type="hidden" value="{{ gg }}" name="text_new">
                     </form>
                 </div>
 
                 </div>
                 
-            <form action="/ras1" method="POST" onsubmit="return confirm('Вы уверенны, что хотите закончить расшифровку?');">    
+            <form action="/ras1" method="POST" onsubmit="return confirm('Вы уверенны, что хотите отменить действие?');">    
                 <input class="backw" type="submit" value="Отменить действие" name="action1">
+                <input type="hidden" value="{{ text }}" name="text_old">
+                <input type="hidden" value="{{ gg }}" name="text_new">
+                <input type="hidden" value="{{ cb }}" name="cb">
             </form>
             </div>
                 </div>
