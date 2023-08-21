@@ -1,7 +1,4 @@
-# за костыльный код отвечает он
-# url='https://github.com/Hil-sys'
-# author этой гениальной идеи:
-# https://github.com/AI1OGUS
+
 
 from flask import *
 
